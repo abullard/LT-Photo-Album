@@ -10,9 +10,9 @@
 const album = Object.freeze(require('./photo-album'));
 const args = process.argv.slice(2);
 
-// we only want one parameter passed in
-// others can be provided, but they won't be utilized.
 async function main() {
+    // extra CLI arguments are ignored by this utility.
+    // I don't do any error handling on input, because the API only accepts numbers.
     const albumNum = args[0];
     const photos = await album.fetchPhotos(albumNum);
     
