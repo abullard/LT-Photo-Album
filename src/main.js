@@ -12,15 +12,19 @@ const args = process.argv.slice(2);
 
 // we only want one parameter passed in
 // others can be provided, but they won't be utilized.
-const albumNum = args[0];
-
-album.fetchPhotos(albumNum)
-.then((photos) => {
+async function main() {
+    const albumNum = args[0];
+    const photos = await album.fetchPhotos(albumNum);
+    
     if(photos.length === 0) {
         console.log("No photos found with the provided album number.");
-    } else {
-        for(const photo of photos) {
-            console.log(`[${photo.id}] ${photo.title}`);
-        }
+        process.exit(0);
     }
-});
+
+    for(const photo of photos) {
+        console.log(`[${photo.id}] ${photo.title}`);
+    }
+
+}
+
+main();
